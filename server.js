@@ -69,7 +69,7 @@ const server = http.createServer((req, res) => {
         res.write(`data: ${hour}`);
         res.write('\n\n');
       }
-    }, 3000);
+    }, 62 * 1000);
 
     setTimeout(() => {
       if (!res.finished) {
