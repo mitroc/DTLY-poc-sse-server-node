@@ -16,6 +16,7 @@ const server = http.createServer((req, res) => {
 
   if (req.url.toLowerCase() === '/events') {
     console.log('Request URL valid');
+    console.log('Origin', req.headers.origin);
     res.writeHead(200, {
       /**
        * The Connection general header controls whether the network
