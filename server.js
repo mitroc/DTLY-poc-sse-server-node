@@ -65,11 +65,11 @@ const server = http.createServer((req, res) => {
           date.getMinutes()
         )}:${padTo2Digits(date.getSeconds())}`;
         console.log('MTR: Sending heartbeat', hour);
-        res.write('event: tick\n');
+        res.write('event: heartbeat\n');
         res.write(`data: ${hour}`);
         res.write('\n\n');
       }
-    }, 62 * 1000);
+    }, 53000);
 
     setTimeout(() => {
       if (!res.finished) {
