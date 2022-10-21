@@ -69,14 +69,11 @@ const server = http.createServer((req, res) => {
         res.write(`data: ${hour}`);
         res.write('\n\n');
       }
+      // Heartbeat must be < 55 sec according to Heroku
     }, 53000);
 
     setTimeout(() => {
       if (!res.finished) {
-        /**
-         * This sends a chunk of the response body. This method may be called
-         * multiple times to provide successive parts of the body.
-         * */
         console.log('MTR: Sending event: flightStateUpdate');
         res.write('event: flightStateUpdate\n');
         res.write('data: {"flight": "I768", "state": "landing"}');
