@@ -104,13 +104,13 @@ const server = http.createServer((req, res) => {
      * be informed to close the stream. Stopping by the server is not
      * implemented - it has to be done with res.end()
      * */
-    setTimeout(() => {
-      if (!res.finished) {
-        res.write('event: closedConnection\n');
-        res.write('data: ');
-        res.write('\n\n');
-      }
-    }, 20000);
+    // setTimeout(() => {
+    //   if (!res.finished) {
+    //     res.write('event: closedConnection\n');
+    //     res.write('data: ');
+    //     res.write('\n\n');
+    //   }
+    // }, 20000);
   } else {
     res.writeHead(404);
     res.end();
