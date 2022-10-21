@@ -53,8 +53,8 @@ const server = http.createServer((req, res) => {
        * same domain (by using a reverse proxy), or by enabling CORS more
        * selectively (i.e. authorizing only specific domains).
        * */
-      'Access-Control-Allow-Origin': req.headers.origin,
-      // 'Access-Control-Allow-Origin': '*',
+      // 'Access-Control-Allow-Origin': req.headers.origin,
+      'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'OPTIONS, POST, GET',
       'Access-Control-Max-Age': 2592000,
     });
