@@ -5,18 +5,19 @@ function padTo2Digits(num) {
 }
 
 const server = http.createServer((req, res) => {
-  console.log(`Requested URL: ${req.url}`);
+  console.log(`MTR: Requested URL: ${req.url}`);
 
   req.on('close', () => {
     if (!res.finished) {
       res.end();
-      console.log('Stopped sending events');
+      console.log('MTR: Server stopped sending events (client closed stream');
     }
   });
 
   if (req.url.toLowerCase() === '/events') {
-    console.log('Request URL valid');
-    console.log('Origin', req.headers.origin);
+    console.log('MTR: Request URL for events is valid');
+
+    console.log('MTR: Setting proper headers');
     res.writeHead(200, {
       /**
        * The Connection general header controls whether the network
@@ -53,11 +54,9 @@ const server = http.createServer((req, res) => {
        * same domain (by using a reverse proxy), or by enabling CORS more
        * selectively (i.e. authorizing only specific domains).
        * */
-      // 'Access-Control-Allow-Origin': req.headers.origin,
       // 'Access-Control-Allow-Origin': '*',
-      // 'Access-Control-Allow-Methods': 'OPTIONS, POST, GET',
-      // 'Access-Control-Max-Age': 2592000,
     });
+    console.log('MTR: Headers set');
 
     setInterval(() => {
       if (!res.finished) {
@@ -65,6 +64,7 @@ const server = http.createServer((req, res) => {
         const hour = `${padTo2Digits(date.getHours())}:${padTo2Digits(
           date.getMinutes()
         )}:${padTo2Digits(date.getSeconds())}`;
+        console.log('MTR: Sending heartbeat', hour);
         res.write('event: tick\n');
         res.write(`data: ${hour}`);
         res.write('\n\n');
@@ -77,6 +77,7 @@ const server = http.createServer((req, res) => {
          * This sends a chunk of the response body. This method may be called
          * multiple times to provide successive parts of the body.
          * */
+        console.log('MTR: Sending event: flightStateUpdate');
         res.write('event: flightStateUpdate\n');
         res.write('data: {"flight": "I768", "state": "landing"}');
         res.write('\n\n');
@@ -85,6 +86,7 @@ const server = http.createServer((req, res) => {
 
     setTimeout(() => {
       if (!res.finished) {
+        console.log('MTR: Sending event: flightStateUpdate');
         res.write('event: flightStateUpdate\n');
         res.write('data: {"flight": "I768", "state": "landed"}');
         res.write('\n\n');
@@ -93,6 +95,7 @@ const server = http.createServer((req, res) => {
 
     setTimeout(() => {
       if (!res.finished) {
+        console.log('MTR: Sending event: flightRemoval');
         res.write('event: flightRemoval\n');
         res.write('data: {"flight": "I768"}');
         res.write('\n\n');
