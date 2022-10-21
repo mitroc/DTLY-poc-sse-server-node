@@ -54,7 +54,7 @@ const server = http.createServer((req, res) => {
        * selectively (i.e. authorizing only specific domains).
        * */
       // 'Access-Control-Allow-Origin': req.headers.origin,
-      'Access-Control-Allow-Origin': '*',
+      // 'Access-Control-Allow-Origin': '*',
       // 'Access-Control-Allow-Methods': 'OPTIONS, POST, GET',
       // 'Access-Control-Max-Age': 2592000,
     });
