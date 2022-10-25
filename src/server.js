@@ -44,17 +44,6 @@ const server = http.createServer((req, res) => {
        * kind (private or shared) should not store this response.
        * */
       'Cache-Control': 'no-store',
-
-      /**
-       * The asterisk assigned to the Access-Control-Allow-Origin header
-       * indicates that any client (from any domain) is authorized to access
-       * this URL. It may not be the desired solution in a production
-       * environment. In fact, in a production environment, we should adopt
-       * a different approach, such as put the two applications under the
-       * same domain (by using a reverse proxy), or by enabling CORS more
-       * selectively (i.e. authorizing only specific domains).
-       * */
-      // 'Access-Control-Allow-Origin': '*',
     });
     console.log('MTR: Headers set');
 
